@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: "postgres:13.1-alpine"
+    container_name: awesome_bank_api_postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/data
+
+  app:
+    container_name: awesome_bank_api_app
+    depends_on:
+      - postgres
+    build: ./
+    restart: on-failure
+    ports:
+      - "8918:8918"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url": "jdbc:postgresql://awesome_bank_api_postgres:5432/postgres",
+        "spring.datasource.username": "postgres",
+        "spring.datasource.password": "postgres",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres:
+    driver: local
