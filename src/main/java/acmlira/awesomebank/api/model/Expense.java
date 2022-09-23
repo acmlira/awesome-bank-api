@@ -8,8 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +49,7 @@ public class Expense {
     @Column
     private BigDecimal value;
 
-    @OneToMany(mappedBy = "expense")
+    @OneToMany(mappedBy = "expense", fetch = FetchType.LAZY, targetEntity=Tag.class, cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
     @Override

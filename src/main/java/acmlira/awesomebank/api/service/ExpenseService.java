@@ -1,6 +1,5 @@
 package acmlira.awesomebank.api.service;
 
-import acmlira.awesomebank.api.repository.TagRepository;
 import lombok.AllArgsConstructor;
 
 import acmlira.awesomebank.api.dto.ExpenseDto;
@@ -8,6 +7,7 @@ import acmlira.awesomebank.api.dto.mapper.ExpenseDtoMapper;
 import acmlira.awesomebank.api.model.Expense;
 import acmlira.awesomebank.api.model.Tag;
 import acmlira.awesomebank.api.repository.ExpenseRepository;
+import acmlira.awesomebank.api.repository.TagRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -27,23 +27,25 @@ public class ExpenseService {
     private ExpenseRepository expenseRepository;
 
     public ExpenseDto create(String name, String description, OffsetDateTime dateTime, BigDecimal value, List<String> codes) {
-        List<Tag> tags = new ArrayList<>();
-        for (String code : codes) {
-            Tag tag = Tag.builder()
-                    .code(code)
-                    .build();
-            tags.add(tagRepository.save(tag));
-        }
-
-        Expense expense = Expense.builder()
+        Expense expense = expenseRepository.save(Expense.builder()
                 .name(name)
                 .description(description)
                 .dateTime(dateTime)
                 .value(value)
-                .tags(tags)
-                .build();
+                .build());
 
-        return ExpenseDtoMapper.writeDto(expenseRepository.save(expense));
+        List<Tag> tags = new ArrayList<>();
+        for (String code : codes) {
+            Tag tag = tagRepository.save(Tag.builder()
+                    .code(code)
+                    .expense(expense)
+                    .build());
+            tags.add(tag);
+        }
+
+        expense.setTags(tags);
+
+        return ExpenseDtoMapper.writeDto(expense);
     }
 
     public Optional<ExpenseDto> findById(UUID expenseId) {
