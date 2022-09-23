@@ -1,5 +1,6 @@
 package acmlira.awesomebank.api.service;
 
+import acmlira.awesomebank.api.repository.TagRepository;
 import lombok.AllArgsConstructor;
 
 import acmlira.awesomebank.api.dto.ExpenseDto;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ExpenseService {
 
+    private TagRepository tagRepository;
     private ExpenseRepository expenseRepository;
 
     public ExpenseDto create(String name, String description, OffsetDateTime dateTime, BigDecimal value, List<String> codes) {
@@ -30,7 +32,7 @@ public class ExpenseService {
             Tag tag = Tag.builder()
                     .code(code)
                     .build();
-            tags.add(tag);
+            tags.add(tagRepository.save(tag));
         }
 
         Expense expense = Expense.builder()

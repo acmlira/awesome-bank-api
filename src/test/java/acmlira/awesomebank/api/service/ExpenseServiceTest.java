@@ -2,10 +2,12 @@ package acmlira.awesomebank.api.service;
 
 import acmlira.awesomebank.api.dto.ExpenseDto;
 import acmlira.awesomebank.api.mock.ExpenseMock;
+import acmlira.awesomebank.api.mock.TagMock;
 import acmlira.awesomebank.api.model.Expense;
 import acmlira.awesomebank.api.model.Tag;
 import acmlira.awesomebank.api.repository.ExpenseRepository;
 
+import acmlira.awesomebank.api.repository.TagRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,11 +34,17 @@ public class ExpenseServiceTest {
     @Mock
     private ExpenseRepository expenseRepository;
 
+    @Mock
+    private TagRepository tagRepository;
+
     private final Expense expense = ExpenseMock.mock();
+
+    private final Tag tag = TagMock.mock();
 
     @Test
     public void shouldCreate() {
         when(expenseRepository.save(any())).thenReturn(expense);
+        when(tagRepository.save(any())).thenReturn(tag);
 
         ExpenseDto expenseDto = expenseService.create(
                 expense.getName(),

@@ -1,8 +1,8 @@
 package acmlira.awesomebank.api.repository;
 
 import acmlira.awesomebank.api.BaseIT;
-import acmlira.awesomebank.api.mock.ExpenseMock;
-import acmlira.awesomebank.api.model.Expense;
+import acmlira.awesomebank.api.mock.TagMock;
+import acmlira.awesomebank.api.model.Tag;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ExpenseRepositoryIT extends BaseIT {
-
+public class TagRepositoryIT extends BaseIT {
     @Autowired
-    private ExpenseRepository expenseRepository;
+    private TagRepository tagRepository;
 
-    private final Expense expense = ExpenseMock.mock();
-
+    private final Tag tag = TagMock.mock();
 
     @Test
     @Transactional
     @Rollback
     void shouldSave() {
-        Expense savedExpense = expenseRepository.save(expense);
+        Tag savedTag = tagRepository.save(tag);
 
-        assertEquals(expense.getName(), savedExpense.getName());
+        assertEquals(tag.getCode(), savedTag.getCode());
     }
 }
