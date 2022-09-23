@@ -6,3 +6,7 @@ In order to make the development easy-understandable for everyone, I present to 
    ```shell
    docker-compose up postgres
    ```
+2. Run integration tests with:
+   ```shell
+   ./mvnw verify
+   ```
