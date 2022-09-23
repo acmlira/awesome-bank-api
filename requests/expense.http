@@ -1,0 +1,22 @@
+### Create
+POST http://localhost:8918/expense
+Content-Type: application/json
+
+{
+  "name": "Habbibs",
+  "description": "Jantar no Habbibs",
+  "dateTime": "2022-09-30T00:00:00.000+03:00",
+  "value": "89.76",
+  "tags": [
+    "COMIDA",
+    "LAZER"
+  ]
+}
+
+<> 2022-09-23T085307.404.json
+
+### FindById
+GET http://localhost:8918/expense/08f896eb-89f9-45c3-8b3c-b06e7ad4fe9e
+
+### FindAll
+GET http://localhost:8918/expense
