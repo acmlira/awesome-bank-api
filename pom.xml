@@ -11,7 +11,7 @@
     <groupId>acmlira</groupId>
     <artifactId>AwesomeBankAPI</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Awesome Bank API</name>
+    <name>awesome-bank-api</name>
     <description>Awesome Bank API</description>
     <properties>
         <java.version>17</java.version>
@@ -85,7 +85,7 @@
                             <skip>false</skip>
                             <includes>
                                 <!-- Include unit tests within integration-test phase. -->
-                                <include>**/*Tests.java</include>
+                                <include>**/*Test.java</include>
                             </includes>
                             <excludes>
                                 <!-- Exclude integration tests within (unit) test phase. -->
