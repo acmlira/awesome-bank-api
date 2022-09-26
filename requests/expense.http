@@ -1,5 +1,5 @@
 ### Create
-POST http://localhost:8918/expense
+POST http://localhost:8918/awesome-bank-api/expense
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 <> 2022-09-23T085307.404.json
 
 ### FindById
-GET http://localhost:8918/expense/08f896eb-89f9-45c3-8b3c-b06e7ad4fe9e
+GET http://localhost:8918/awesome-bank-api/expense/1fbb1701-4572-4438-87e0-d8f3b397457b
 
 ### FindAll
-GET http://localhost:8918/expense
+GET http://localhost:8918/awesome-bank-api/expense

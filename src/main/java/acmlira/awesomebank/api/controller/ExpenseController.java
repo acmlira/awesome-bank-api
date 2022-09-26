@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/expense")
+@RequestMapping("/awesome-bank-api/expense")
 public class ExpenseController {
 
     private ExpenseService expenseService;
