@@ -64,3 +64,9 @@ In order to make the development easy-understandable for everyone, I present to 
 ### No effect changes
 
 Clean your docker environment (remove images, networks, containers, etc.).
+
+## What can be improved?
+
+I see some improvements:
+- Automated integration tests (tradeoff)
+- More business rules
